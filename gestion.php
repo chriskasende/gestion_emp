@@ -16,7 +16,7 @@
     </div>
     <?php
     $bdd = mysqli_init();
-    mysqli_real_connect($bdd, "127.0.0.1", "chris", "123456789", "newtest");
+    mysqli_real_connect($bdd, "127.0.0.1", "root", "", "newtest");
     $sup = mysqli_query($bdd, "SELECT sup FROM employes;");
     $tab2 = mysqli_fetch_all($sup, MYSQLI_ASSOC);
     $result = mysqli_query($bdd, "SELECT nom, prenom, emploi, sup, noserv,noemp FROM employes;");

@@ -9,13 +9,15 @@
     <title>Document</title>
 </head>
 <?php
-$conn = mysqli_connect('localhost', 'chris', '123456789', 'newtest');
+$conn = mysqli_connect('localhost', 'root', '', 'newtest');
 $noemp = $nom = $prenom =  $emploi = $sup = $embauche = $sal = $comm = $noserv  = $date_ajout  = null;
 $isThereError = false;
 $message = "";
 $nomRegex = "#[A-Za-z\é\è\ê\-]+$#";
-$noempRegex = "#^1[0-9]{3}$#";
-if (isset($_REQUEST['buttonAjout'])) {
+// $nomRegex = "#[A-Za-z-]+$#";
+$noempRegex = "#^[0-9]{4}$#";
+if (isset($_POST['bouttonAjout'])) {
+    echo "HOULAAAA";
     if (isset(
         $_POST["noemp"],
         $_POST["nom"],
@@ -29,7 +31,7 @@ if (isset($_REQUEST['buttonAjout'])) {
 
 
     )) {
-
+        echo "HAAAAAAAAAALAAAA";
         $noemp = $_POST['noemp'];
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];
@@ -81,6 +83,7 @@ if (isset($_REQUEST['buttonAjout'])) {
 
 <body>
     <?php
+    echo "EOOOOOOOOOOOOOOOOOOOOOOO";
     mysqli_close($conn);
     if (isset($_POST['buttonAjout']) && !$isThereError) {
     ?> <div class=" alerte-success">Employé ajouté ! Vous allez être redirigé...</div>
@@ -126,6 +129,12 @@ if (isset($_REQUEST['buttonAjout'])) {
                 <input type="text" class="form-control" id="sup" name="sup" placeholder="Numéro du supérieur" required>
 
             </div>
+
+            <div class="mb-3">
+                <label for="embauche" class="form-label">Date d'embauche :</label>
+                <input type="date" class="form-control" id="embauche" name="embauche" placeholder="Exemple : 1999-12-25" required>
+
+            </div>
             <div class="mb-3">
                 <label for="sal" class="form-label">Salaire :</label>
                 <input type="text" class="form-control" id="sal" name="sal" placeholder="Votre salaire" required>
@@ -139,7 +148,7 @@ if (isset($_REQUEST['buttonAjout'])) {
                 <input type="text" class="form-control" id="noserv" name="noserv" placeholder="Votre Numéro de service" required>
             </div>
             <div>
-                </pan><button type="submit" class="btn btn-dark" name="bouttonAjout">Envoyer</button>
+                </pan><button type="submit" class="btn btn-dark" value="bouttonAjout" name="bouttonAjout">Envoyer</button>
     </form>
     </div>
     </div>
