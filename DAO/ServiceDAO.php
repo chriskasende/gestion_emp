@@ -1,6 +1,5 @@
 <?php
 
-class ServiceDAO extends commonDAO {
-
-    public 
+class ServiceDAO extends commonDAO
+{
 }
