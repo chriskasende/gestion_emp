@@ -31,7 +31,7 @@
 
 
     echo "<td>Nombre d'ajout aujourd'hui:" . $tab3 . "</td>";
-    print_r($tab3);
+
     ?>
     <div class="content">
         <table class="table ">

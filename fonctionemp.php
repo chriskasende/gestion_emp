@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="mystyle.css">
-    <title>Document</title>
-</head>
 <?php
 $conn = mysqli_connect('localhost', 'root', '', 'newtest');
 $noemp = $nom = $prenom =  $emploi = $sup = $embauche = $sal = $comm = $noserv  = $date_ajout  = null;
@@ -70,9 +60,9 @@ if (isset($_POST['bouttonAjout'])) {
         // Condition regex pour imprimer les données dans la table
 
         if (preg_match($nomRegex, $nom) && preg_match($nomRegex, $prenom) && preg_match($noempRegex, $noemp) && !$isThereError) {
-
             ajout_emp($sup, $noemp, $noserv, $nom, $prenom, $emploi, $embauche, $sal, $comm);
-            // renvoie vers l'index
+
+            // Renvoi vers l'index
             // header("Refresh: 3;URL=gestion.php");
         }
     }
@@ -157,15 +147,16 @@ if (isset($_POST['bouttonAjout'])) {
     </div>
 </body>
 
-</html><?php
-        function ajout_emp($sup, $noemp, $noserv, $nom, $prenom, $emploi, $embauche, $sal, $comm)
-        {
-            $conn = mysqli_connect('localhost', 'root', '', 'newtest');
+</html>
+<?php
+function ajout_emp($sup, $noemp, $noserv, $nom, $prenom, $emploi, $embauche, $sal, $comm)
+{
+    $conn = mysqli_connect('localhost', 'root', '', 'newtest');
 
-            $requete = "INSERT INTO employes(noemp,nom,prenom,emploi,sup,embauche,sal,comm,noserv,date_ajout) 
+    $requete = "INSERT INTO employes(noemp,nom,prenom,emploi,sup,embauche,sal,comm,noserv,date_ajout) 
     VALUES('$noemp','$nom','$prenom','$emploi','$sup','$embauche','$sal','$comm','$noserv',date(sysdate()));";
-            var_dump($requete);
-            mysqli_query($conn, "INSERT INTO employes(noemp,nom,prenom,emploi,sup,embauche,sal,comm,noserv,date_ajout) 
+    var_dump($requete);
+    mysqli_query($conn, "INSERT INTO employes(noemp,nom,prenom,emploi,sup,embauche,sal,comm,noserv,date_ajout) 
     VALUES('$noemp','$nom','$prenom','$emploi','$sup','$embauche','$sal','$comm','$noserv',date(sysdate()));");
-        }
-        ?>
+}
+?>

@@ -8,113 +8,35 @@
     <link rel="stylesheet" href="mystyle.css">
     <title>Document</title>
 </head>
-<?php
-$conn = mysqli_connect('localhost', 'root', '', 'newtest');
-$noemp = $nom = $prenom =  $emploi = $sup = $embauche = $sal = $comm = $noserv  = $date_ajout  = null;
-$isThereError = false;
-$message = "";
-$nomRegex = "#[A-Za-z\é\è\ê\-]+$#";
-// $nomRegex = "#[A-Za-z-]+$#";
-$noempRegex = "#^[0-9]{4}$#";
-if (isset($_POST['bouttonAjout'])) {
-    echo " inscrit";
-    if (isset(
-        $_POST["noemp"],
-        $_POST["nom"],
-        $_POST["prenom"],
-        $_POST["emploi"],
-        $_POST["sup"],
-        $_POST["embauche"],
-        $_POST["sal"],
-        $_POST["comm"],
-        $_POST["noserv"],
-
-
-    )) {
-        echo "n'imp";
-        $noemp = $_POST['noemp'];
-        $nom = $_POST['nom'];
-        $prenom = $_POST['prenom'];
-        $emploi = $_POST['emploi'];
-        $sup = $_POST['sup'];
-        $embauche = $_POST['embauche'];
-        $sal = $_POST['sal'];
-        $comm = $_POST['comm'];
-        $noserv = $_POST['noserv'];
-
-
-        /////////////////////////////////////
-        if (empty($noemp)) {
-            $message = "Numéro requis";
-            $isThereError = true;
-        } elseif (!preg_match($noempRegex, $noemp)) {
-            $message = "4 chiffres maximum commençant par 1";
-            $isThereError = true;
-        }
-        if (empty($nom)) {
-            $message = "Nom requis";
-            $isThereError = true;
-        } elseif (!preg_match($nomRegex, $nom)) {
-            $message = "lettres et espaces uniquement";
-            $isThereError = true;
-        }
-        /////////////////////////////////////
-        if (empty($prenom)) {
-            $message = "Prénom requis";
-            $isThereError = true;
-        } elseif (!preg_match($nomRegex, $prenom)) {
-            $message = "lettres et espaces uniquement";
-            $isThereError = true;
-        }
-
-        // Condition regex pour imprimer les données dans la table
-
-        if (preg_match($nomRegex, $nom) && preg_match($nomRegex, $prenom) && preg_match($noempRegex, $noemp) && !$isThereError) {
-
-            ajout_emp($sup, $noemp, $noserv, $nom, $prenom, $emploi, $embauche, $sal, $comm);
-            // renvoie vers l'index
-            // header("Refresh: 3;URL=gestion.php");
-        }
-    }
-} ?>
 
 <body>
     <?php
+    include_once(__DIR__ . '/../DAO/EmployeDAO.php');
 
-    mysqli_close($conn);
-    if (isset($_POST['buttonAjout']) && !$isThereError) {
-    ?> <div class=" alerte-success">Employé ajouté ! </div>
-    <?php
-    } elseif (isset($_POST['buttonAjout']) && $isThereError) {
-    ?> <div class=" alerte-danger">L'ajout a échoué</div>
-    <?php
-    }
     ?>
 
 
-
-
-    <form action="" method="post">
+    <form action="ajouter.php" method="post">
         <div class="form">
             <legend>Entrez vos informations</legend>
 
             <div class="form-group">
                 <label for="noemp" class="form-label">Noemp</label> :
-                <input type="text" class="form-control" name="noemp" placeholder="numéro d'employé" maxlength="4" value="<?php echo $noemp ?>">
-                <span class="comments text-danger font-italic"><?php echo $message ?></span>
+                <input type="text" class="form-control" name="noemp" placeholder="numéro d'employé" maxlength="4">
+                <span class="comments text-danger font-italic"></span>
             </div>
 
 
             <div class="mb-3">
                 <label for="nom" class="form-label">Nom :</label>
-                <input type="text" class="form-control" id="nom" name="prenom" placeholder="Votre Nom" required value="<?php echo $nom ?>">
-                <span class="comments text-danger font-italic"><?php echo $message ?></span>
+                <input type="text" class="form-control" id="nom" name="prenom" placeholder="Votre Nom" required>
+                <span class="comments text-danger font-italic"></span>
 
             </div>
             <div class="mb-3">
                 <label for="prenom" class="form-label">Prenom :</label>
-                <input type="text" class="form-control" id="prenom" name="nom" placeholder="Votre Prénom" required value="<?php echo $prenom ?>">
-                <span class="comments text-danger font-italic"><?php echo $message ?></span>
+                <input type="text" class="form-control" id="prenom" name="nom" placeholder="Votre Prénom" required>
+                <span class="comments text-danger font-italic"></span>
 
             </div>
             <div class="mb-3">
