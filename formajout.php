@@ -167,5 +167,6 @@ if (isset($_POST['bouttonAjout'])) {
             var_dump($requete);
             mysqli_query($conn, "INSERT INTO employes(noemp,nom,prenom,emploi,sup,embauche,sal,comm,noserv,date_ajout) 
     VALUES('$noemp','$nom','$prenom','$emploi','$sup','$embauche','$sal','$comm','$noserv',date(sysdate()));");
+            mysqli_close($conn);
         }
         ?>

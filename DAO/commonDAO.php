@@ -6,7 +6,7 @@ class CommonDAO
 {
     protected function connexionBDD()
     {
-        $mysqli = new mysqli('127.0.0.1', 'root', '', 'employes_bdd');
+        $mysqli = new mysqli('127.0.0.1', 'root', '', 'newtest');
         return $mysqli;
     }
 }
